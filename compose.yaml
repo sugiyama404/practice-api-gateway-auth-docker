@@ -1,0 +1,22 @@
+services:
+  nginx:
+    image: nginx:alpine
+    ports:
+      - "80:80"
+    volumes:
+      - ./nginx/conf.d:/etc/nginx/conf.d
+  api:
+    build: ./api
+    volumes:
+      - ./api:/app
+    env_file:
+      - .env
+    environment:
+      - FLASK_APP=app.py
+      - FLASK_ENV=development
+  authorizer:
+    build: ./authorizer
+    env_file:
+      - .env
+    volumes:
+      - ./authorizer:/app
