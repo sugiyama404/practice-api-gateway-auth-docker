@@ -1,0 +1,5 @@
+{
+    "[conf]": {
+        "editor.formatOnSave": false
+    }
+}

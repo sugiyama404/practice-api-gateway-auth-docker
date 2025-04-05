@@ -2,7 +2,7 @@ import json
 import logging
 import os
 import datetime
-from flask import Flask, jsonify, request
+from flask import Flask, request
 from flask_cors import CORS
 
 # ロガーの設定
@@ -58,17 +58,17 @@ def protected():
             response_data["queryParams"] = dict(request.args)
 
         # 正常なレスポンスを返す
-        return jsonify(response_data)
+        return json.dumps(response_data, ensure_ascii=False)
 
     except Exception as e:
         # エラーログの記録
         logger.error(f"Error processing request: {str(e)}", exc_info=True)
 
         # エラーレスポンスを返す
-        return jsonify({
+        return json.dumps({
             "message": "内部サーバーエラーが発生しました",
             "errorType": type(e).__name__
-        }), 500
+        }, ensure_ascii=False), 500
 
 if __name__ == '__main__':
     app.run(debug=True, host='0.0.0.0', port=8000)
