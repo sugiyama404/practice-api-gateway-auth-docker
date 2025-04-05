@@ -14,7 +14,8 @@ CORS(app)
 
 @app.route('/')
 def index():
-    return jsonify({"message": "Welcome to API Gateway with Lambda Authorizer simulation"})
+    return json.dumps({"message": "Welcome to API Gateway with Lambda Authorizer simulation"}, ensure_ascii=False)
+
 
 @app.route('/protected')
 def protected():
